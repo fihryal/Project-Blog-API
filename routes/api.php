@@ -1,8 +1,10 @@
 <?php
 
 use Illuminate\Http\Request;
+use Laravel\Sanctum\Sanctum;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\AuthenticationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,5 +18,7 @@ use App\Http\Controllers\PostController;
 */
 
 route::get('/posts', [PostController::class ,'index']);
-route::get('/posts/{id}', [PostController::class ,'show']);
-route::get('/posts/detail/{id}', [PostController::class ,'detail']);
+route::get('/posts/{id}', [PostController::class ,'show'])->middleware(['auth:sanctum']);
+route::get('/posts/detail/{id}', [PostController::class ,'detail'])->middleware(['auth:sanctum']);
+
+route::post('/login', [AuthenticationController::class ,'login']);
