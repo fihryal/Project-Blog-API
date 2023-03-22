@@ -22,3 +22,4 @@ route::get('/posts/{id}', [PostController::class ,'show'])->middleware(['auth:sa
 route::get('/posts/detail/{id}', [PostController::class ,'detail'])->middleware(['auth:sanctum']);
 
 route::post('/login', [AuthenticationController::class ,'login']);
+route::get('/logout',[AuthenticationController::class, 'logout'])->middleware(['auth:sanctum']);
