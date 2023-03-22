@@ -15,9 +15,15 @@ class PostController extends Controller
         return PostResourc::collection($posts);
     }
 
-    public function id($id)
+    public function show($id)
     {
         $post = Post::findOrFail($id);
+        return new DetailPostResourc($post);
+    }
+    
+    public function detail($id)
+    {
+        $post = Post::with('writer:id,username')->findOrFail($id);
         return new DetailPostResourc($post);
     }
 }
