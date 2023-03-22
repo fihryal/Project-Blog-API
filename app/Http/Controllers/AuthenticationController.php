@@ -34,4 +34,9 @@ class AuthenticationController extends Controller
             'message' => 'anda sudah logout'
         ]);
     }
+
+    public function me(Request $request){
+        $user = Auth::user();
+        return response()->json($user);
+    }
 }
