@@ -23,7 +23,7 @@ class PostController extends Controller
     
     public function detail($id)
     {
-        $post = Post::with('writer:id,username')->findOrFail($id);
+        $post = Post::with('writer:id,name')->findOrFail($id);
         return new DetailPostResourc($post);
     }
 }

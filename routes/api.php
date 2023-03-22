@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Laravel\Sanctum\Sanctum;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\Api\RegisterController;
 use App\Http\Controllers\AuthenticationController;
 
 /*
@@ -23,4 +24,5 @@ route::get('/posts/detail/{id}', [PostController::class ,'detail'])->middleware(
 
 route::post('/login', [AuthenticationController::class ,'login']);
 route::get('/logout',[AuthenticationController::class, 'logout'])->middleware(['auth:sanctum']);
+Route::post('/register',RegisterController::class,'register');
 route::get('/me',[AuthenticationController::class, 'me'])->middleware(['auth:sanctum']);

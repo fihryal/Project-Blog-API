@@ -11,13 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        if(!Schema::hasTable('users')){ /*ini error jadi pakek ginian kalo gak mah gak make*/
+        if(!Schema::hasTable('users')){ /*ini error jadi pakek ginian kalo gak mah gak make (minesnya gak bisa costum)*/
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('username');
+            $table->string('name')->unique();
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('username')->unique();
             $table->timestamps();
             
             $table->softDeletes();
