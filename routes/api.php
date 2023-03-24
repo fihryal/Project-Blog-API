@@ -24,6 +24,7 @@ route::middleware(['auth:sanctum'])->group(function(){
     route::get('/posts/detail/{id}', [PostController::class ,'detail']);
     route::post('/posts',[PostController::class , 'store']);
     route::patch('/posts/{id}',[PostController::class, 'update']);
+    route::delete('/posts/{id}',[PostController::class, 'delete']);
     
     route::get('/logout',[AuthenticationController::class, 'logout']);
     route::get('/me',[AuthenticationController::class, 'me']);
