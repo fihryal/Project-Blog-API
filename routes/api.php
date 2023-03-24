@@ -18,11 +18,17 @@ use App\Http\Controllers\AuthenticationController;
 |
 */
 
+route::middleware(['auth:sanctum'])->group(function(){
+    
+    route::get('/posts/{id}', [PostController::class ,'show']);
+    route::get('/posts/detail/{id}', [PostController::class ,'detail']);
+    route::post('/posts',[PostController::class , 'store']);
+    
+    route::get('/logout',[AuthenticationController::class, 'logout']);
+    route::get('/me',[AuthenticationController::class, 'me']);
+});
+
 route::get('/posts', [PostController::class ,'index']);
-route::get('/posts/{id}', [PostController::class ,'show'])->middleware(['auth:sanctum']);
-route::get('/posts/detail/{id}', [PostController::class ,'detail'])->middleware(['auth:sanctum']);
 
 route::post('/login', [AuthenticationController::class ,'login']);
-route::get('/logout',[AuthenticationController::class, 'logout'])->middleware(['auth:sanctum']);
 Route::post('/register',RegisterController::class,'register');
-route::get('/me',[AuthenticationController::class, 'me'])->middleware(['auth:sanctum']);

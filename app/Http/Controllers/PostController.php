@@ -6,7 +6,7 @@ use App\Http\Resources\DetailPostResourc;
 use App\Http\Resources\PostResourc;
 use App\Models\post;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -23,7 +23,22 @@ class PostController extends Controller
     
     public function detail($id)
     {
-        $post = Post::with('writer:id,name')->findOrFail($id);
+        $post = Post::with('writer:id,username')->findOrFail($id);
         return new DetailPostResourc($post);
+    }
+
+    public function store(Request $request)
+    {
+        $request-> validate([
+            'title' => 'required|max:225',
+            'content' => 'required'
+        ]);
+
+        // return response()->json('sudah dapat di digunakan');
+
+        $request['author'] = Auth::user()->id;
+
+        $post = Post::create($request->all());
+        return new DetailPostResourc($post->loadMissing('writer:id,username'));
     }
 }
