@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('author');
             $table->string('title');
             $table->text('content');
-            $table->unsignedBigInteger('author');
             $table->timestamps();
 
             $table->softDeletes();
