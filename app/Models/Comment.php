@@ -14,4 +14,9 @@ class Comment extends Model
         'user_id',
         'comments_content'
     ];
+
+    public function commentator(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'foreign_key','id');
+    }
 }
