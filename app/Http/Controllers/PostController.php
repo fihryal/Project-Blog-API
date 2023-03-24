@@ -12,12 +12,13 @@ class PostController extends Controller
 {
     public function index(){
         $posts = post :: all();
-        return PostResourc::collection($posts);
+        // return PostResourc::collection($posts);
+        return DetailPostResourc::collection($posts->loadMissing('writer:id,username', 'comments:id,post_id,user_id,comments_content'));
     }
 
     public function show($id)
     {
-        $post = Post::findOrFail($id);
+        $post = Post::with('writer:id,username', 'comments:id,post_id,user_id,comments_content')->findOrFail($id);
         return new DetailPostResourc($post);
     }
     
