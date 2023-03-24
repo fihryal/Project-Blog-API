@@ -23,7 +23,7 @@ class PostOwner
 
         if($post -> author != $currentUser->id){
             return response()->json([
-                'messages' => 'Data tidak di temukan'
+                'messages' => 'Anda bukan pemilik Post'
             ],404);
         }
         

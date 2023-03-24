@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\Api\RegisterController;
 use App\Http\Controllers\AuthenticationController;
+use App\Http\Controllers\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,8 @@ route::middleware(['auth:sanctum'])->group(function(){
     route::post('/posts',[PostController::class , 'store']);
     route::patch('/posts/{id}',[PostController::class, 'update'])->middleware('post.owner');
     route::delete('/posts/{id}',[PostController::class, 'delete'])->middleware('post.owner');
+
+    route::post('/comment',[CommentController::class, 'store']);
     
     route::get('/logout',[AuthenticationController::class, 'logout']);
     route::get('/me',[AuthenticationController::class, 'me']);
