@@ -29,6 +29,7 @@ route::middleware(['auth:sanctum'])->group(function(){
 
     route::post('/comment',[CommentController::class, 'store']);
     route::patch('/comment/{id}',[commentController::class, 'update'])->middleware('comment.owner');
+    route::delete('/comment/{id}',[commentController::class, 'delete'])->middleware('comment.owner');
     
     route::get('/logout',[AuthenticationController::class, 'logout']);
     route::get('/me',[AuthenticationController::class, 'me']);
