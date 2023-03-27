@@ -31,10 +31,18 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
-        $request-> validate([
+        $validator = validator($request->all(),[
             'title' => 'required|max:225',
-            'content' => 'required'
+            'content' => 'required',
+            'file' => 'required|mimes:png,jpg,jpeg|max:2048'
         ]);
+        
+        if ($validator->fails())
+        {
+        return response()->json([
+            'message' => 'File yang anda masukkan tidak sesuai (png,jpg,jpeg)'
+        ],400);
+        }
 
         $image = null;
 
@@ -54,10 +62,18 @@ class PostController extends Controller
     }
 
     public function update(Request $request, $id){
-        $request-> validate([
+        $validator = validator($request->all(),[
             'title' => 'required|max:225',
-            'content' => 'required'
+            'content' => 'required',
+            'file' => 'required|mimes:png,jpg,jpeg|max:2048'
         ]);
+        
+        if ($validator->fails())
+        {
+        return response()->json([
+            'message' => 'File yang anda masukkan tidak sesuai (png,jpg,jpeg)'
+        ],400);
+        }
 
         $image = null;
 
