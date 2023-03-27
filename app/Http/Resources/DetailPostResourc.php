@@ -21,7 +21,7 @@ class DetailPostResourc extends JsonResource
         'content' => $this -> content,
         'author_id' => $this->author,
         'writer' => $this->whenLoaded('writer'),
-        'comment_totla' => $this->whenLoaded('comments', function(){
+        'comment_total' => $this->whenLoaded('comments', function(){
             return count($this->comments);
         }),
         'comments' => $this->whenLoaded('comments', function(){

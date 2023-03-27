@@ -16,6 +16,7 @@ class post extends Model
         'title',
         'content',
         'author',
+        'image'
     ];
 
     public function writer(): BelongsTo{
