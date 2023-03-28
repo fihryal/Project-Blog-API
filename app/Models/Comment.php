@@ -19,6 +19,6 @@ class Comment extends Model
 
     public function commentator(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'foreign_key','id');
+        return $this->belongsTo(User::class, 'user_id','id');
     }
 }

@@ -47,6 +47,7 @@ class PostController extends Controller
             'title' => 'required|max:225',
         ]);
         
+        
         if ($img->fails())
         {
         return response()->json([
