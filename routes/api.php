@@ -38,5 +38,7 @@ route::middleware(['auth:sanctum'])->group(function(){
 
 route::get('/posts', [PostController::class ,'index']);
 
+route::get('search/{title}', [PostController::class,'search']);
+
 route::post('/login', [AuthenticationController::class ,'login']);
 route::post('/register',RegisterController::class,'register');

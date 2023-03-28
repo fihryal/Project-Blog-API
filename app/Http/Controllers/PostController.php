@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Resources\DetailPostResourc;
 use App\Http\Resources\PostResourc;
 use App\Models\post;
+use App\Models\search;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -115,5 +116,17 @@ class PostController extends Controller
             $randomString .= $characters[random_int(0, $charactersLength - 1)];
         }
         return $randomString;
+    }
+
+    public function search($title)
+    {
+        $result = search::where('title', 'LIKE', '%'. $title. '%')->get();
+        if(count($result)){
+         return Response()->json($result);
+        }
+        else
+        {
+        return response()->json(['Result' => 'No Data not found'], 404);
+      }
     }
 }
