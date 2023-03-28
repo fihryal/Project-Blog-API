@@ -16,12 +16,11 @@ class DetailPostResourc extends JsonResource
     {
         // return parent::toArray($request);
         return[
-        'id' => $this -> id,
+        'id_post' => $this -> id,
+        'writer' => $this->whenLoaded('writer'),
         'title' => $this -> title,
         'image' => $this->image,
         'content' => $this -> content,
-        'author_id' => $this->author,
-        'writer' => $this->whenLoaded('writer'),
         'comment_total' => $this->whenLoaded('comments', function(){
             return count($this->comments);
         }),

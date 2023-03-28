@@ -12,7 +12,7 @@ class CommentController extends Controller
     public function store(Request $request)
     {
         $request -> validate([
-            'post_id' => 'required|exists:posts,id',
+            'post_id' => 'required',
             'comments_content' => 'required'
         ]);
 
@@ -21,7 +21,7 @@ class CommentController extends Controller
         $comment = Comment::create($request->all());
 
 
-        return new commentResource($comment->loadMissing(['commentator:id,username']));
+        return new CommentResource($comment->loadMissing(['commentator:id,username']));
     }
 
     public function update(Request $request, $id)
@@ -34,7 +34,7 @@ class CommentController extends Controller
         $comment = Comment::findOrFail($id);
         $comment->update($request->only('comments_content'));
 
-        return new CommentResource($comment->loadMissing(['commentator:id,username']));
+        return new CommentResource($comment->loadMissing('commentator:id,username'));
     }
 
     public function delete($id)
@@ -42,7 +42,7 @@ class CommentController extends Controller
         $comment = Comment::findOrFail($id);
         $comment->delete();
 
-        return new CommentResource($comment->loadMissing(['commentator:id,username']));
+        return new CommentResource($comment->loadMissing('commentator:id,username'));
 
     }
 

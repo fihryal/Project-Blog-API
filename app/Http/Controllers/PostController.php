@@ -7,14 +7,15 @@ use App\Http\Resources\PostResourc;
 use App\Models\post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
     public function index(){
         $posts = post :: all();
-        // return PostResourc::collection($posts);
-        return DetailPostResourc::collection($posts->loadMissing('writer:id,username', 'comments:id,post_id,user_id,comments_content'));
+        return PostResourc::collection($posts);
+        // return DetailPostResourc::collection($posts->loadMissing('writer:id,username', 'comments:id,post_id,user_id,comments_content'));
     }
 
     public function show($id)
@@ -28,6 +29,8 @@ class PostController extends Controller
         $post = Post::with('writer:id,username')->findOrFail($id);
         return new DetailPostResourc($post);
     }
+
+    
 
     public function store(Request $request)
     {
