@@ -35,7 +35,7 @@ class AuthenticationController extends Controller
         ]);
     }
 
-    public function me(Request $request){
+    public function me(){
         $user = Auth::user();
         return response()->json($user);
     }

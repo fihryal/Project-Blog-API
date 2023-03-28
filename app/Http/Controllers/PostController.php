@@ -35,16 +35,36 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
-        $validator = validator($request->all(),[
-            'title' => 'required|max:225',
-            'content' => 'required',
+        $img = validator($request->all(),[
             'file' => 'required|mimes:png,jpg,jpeg|max:2048'
         ]);
         
-        if ($validator->fails())
+        $content = validator($request->all(),[
+            'content' => 'required',
+        ]);
+        
+        $title = validator($request->all(),[
+            'title' => 'required|max:225',
+        ]);
+        
+        if ($img->fails())
         {
         return response()->json([
             'message' => 'File yang anda masukkan tidak sesuai (png,jpg,jpeg)'
+        ],400);
+        }
+        
+        if ($content->fails())
+        {
+        return response()->json([
+            'message' => 'Mohon isi di bagian content'
+        ],400);
+        }
+        
+        if ($title->fails())
+        {
+        return response()->json([
+            'message' => 'Mohon di isi di bagian title'
         ],400);
         }
 
